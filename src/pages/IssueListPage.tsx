@@ -1,30 +1,41 @@
 import Container from '../components/Container';
 import IssueItem from '../components/IssueItem';
 import Loading from '../components/Loading';
+import { useScroll } from '../hooks/useScroll';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { fetchIssueList } from '../store/slices/issueList';
 import ErrorPage from './ErrorPage';
 import { useEffect } from 'react';
 import styled from 'styled-components';
 
+const scrollOffsetHeight = 10;
+
 function Issues() {
   const dispatch = useAppDispatch();
-  const { loading, data: issueList, error } = useAppSelector(state => state.issueList);
+  const { scrollHeight, scrollY } = useScroll();
+  const { loading, data: issueList, error, page } = useAppSelector(state => state.issueList);
 
   useEffect(() => {
-    dispatch(fetchIssueList(1));
-  }, [dispatch]);
+    issueList.length === 0 && dispatch(fetchIssueList(1));
+  }, []);
+
+  useEffect(() => {
+    if (loading) return;
+    if (scrollY > scrollHeight - 30) {
+      dispatch(fetchIssueList(page + 1));
+      return;
+    }
+  }, [loading, page, issueList, scrollY, scrollHeight]);
 
   if (error) {
     return <ErrorPage />;
   }
-
   return (
     <Container>
       <h1>리액트 이슈 목록</h1>
       <Ul>
-        {issueList.map(issue => (
-          <IssueItem issue={issue} />
+        {issueList.map((issue, idx) => (
+          <IssueItem issue={issue} key={idx} />
         ))}
       </Ul>
       {loading && <Loading />}

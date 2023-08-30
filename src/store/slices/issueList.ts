@@ -7,7 +7,7 @@ export const fetchIssueList = createAsyncThunk(
   async (page: number, { rejectWithValue }) => {
     try {
       const issues = await getIssueList(page);
-      return issues;
+      return { issues, page };
     } catch (error) {
       return rejectWithValue((error as { message: string }).message);
     }
@@ -15,7 +15,7 @@ export const fetchIssueList = createAsyncThunk(
 );
 export const isssueListSlice = createSlice({
   name: 'issueList',
-  initialState: { data: [] as Issue[], loading: false, error: null as string | null },
+  initialState: { data: [] as Issue[], page: 0, loading: false, error: null as string | null },
   reducers: {},
 
   extraReducers: builder => {
@@ -25,7 +25,8 @@ export const isssueListSlice = createSlice({
       })
       .addCase(fetchIssueList.fulfilled, (state, action) => {
         state.loading = false;
-        state.data = action.payload;
+        state.data = [...state.data, ...action.payload.issues];
+        state.page = action.payload.page;
       })
       .addCase(fetchIssueList.rejected, (state, action) => {
         state.loading = false;

@@ -7,19 +7,16 @@ import ErrorPage from './ErrorPage';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-type Props = {};
-
 function IssueDetailPage() {
   const { issue_id } = useParams();
-
   const dispatch = useAppDispatch();
   const { loading, data: issue, error } = useAppSelector(state => state.issueDetail);
+
   useEffect(() => {
     dispatch(fetchIssueDetail(Number(issue_id)));
   }, []);
 
   if (error) {
-    console.error(error);
     return <ErrorPage />;
   }
   if (loading) {

@@ -2,7 +2,8 @@ import instance from '.';
 import { Issue, IssueDetail } from '../types';
 
 export const getIssueList = async (page = 1): Promise<Issue[]> => {
-  const per_page = 20;
+  const per_page = 10;
+
   const res = (
     await instance.get(`facebook/react/issues?per_page=${per_page}&page=${page}&sort=comments`)
   ).data;
@@ -33,7 +34,6 @@ export const getIssuesDetail = async (issueNumber: number): Promise<IssueDetail>
       avatar: res.user.avatar_url,
     },
   };
-  console.info('fet: ', issueNumber, res);
 
   return data;
 };
