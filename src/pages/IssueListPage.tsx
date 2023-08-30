@@ -9,7 +9,7 @@ import ErrorPage from './ErrorPage';
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
-const scrollOffsetHeight = 10;
+const scrollOffsetHeight = 30;
 
 function Issues() {
   const dispatch = useAppDispatch();
@@ -22,7 +22,7 @@ function Issues() {
 
   useEffect(() => {
     if (loading) return;
-    if (scrollY > scrollHeight - 30) {
+    if (scrollY > scrollHeight - scrollOffsetHeight) {
       dispatch(fetchIssueList(page + 1));
       return;
     }
@@ -33,7 +33,7 @@ function Issues() {
   }
   return (
     <Container>
-      <h1>리액트 이슈 목록</h1>
+      <Title>리액트 이슈 목록</Title>
       <Ul>
         {issueList.map((issue, idx) => (
           <React.Fragment key={issue.issueNumber}>
@@ -57,4 +57,8 @@ const Ul = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 15px;
+`;
+
+const Title = styled.h1`
+  padding-left: 35px;
 `;
