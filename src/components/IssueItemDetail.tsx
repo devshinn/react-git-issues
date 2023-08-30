@@ -1,5 +1,6 @@
 import { getDateform } from '../lib/utils';
 import { IssueDetail } from '../types';
+import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 import styled from 'styled-components';
 
 function IssueItemDetail({ issue }: { issue: IssueDetail }) {
@@ -7,7 +8,6 @@ function IssueItemDetail({ issue }: { issue: IssueDetail }) {
     <Wrap>
       <Header>
         <img src={issue?.user?.avatar} alt={`${issue?.user?.name} avatar`} />
-
         <div>
           <h3> {issue?.user?.name}</h3>
           <span> {getDateform(issue?.createdAt)}</span>
@@ -19,7 +19,7 @@ function IssueItemDetail({ issue }: { issue: IssueDetail }) {
       </Header>
       <Contents>
         <h1 className='title'>{issue?.title}</h1>
-        <div className='content'>{issue.content}</div>
+        <ReactMarkdown className='content'>{issue.content}</ReactMarkdown>
       </Contents>
     </Wrap>
   );
@@ -86,8 +86,15 @@ const Header = styled.header`
 const Contents = styled.div`
   .title {
     padding: 10px;
+    border-bottom: solid 1px var(--border);
   }
   .content {
     padding: 20px 10px;
+    img {
+      width: 100%;
+    }
+    a {
+      color: skyblue;
+    }
   }
 `;
