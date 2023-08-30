@@ -5,7 +5,9 @@ export const getIssueList = async (page = 1): Promise<Issue[]> => {
   const per_page = 10;
 
   const res = (
-    await instance.get(`facebook/react/issues?per_page=${per_page}&page=${page}&sort=comments`)
+    await instance.get(
+      `facebook/react/issues?state=open&per_page=${per_page}&page=${page}&sort=comments`,
+    )
   ).data;
 
   const data = res.map((issue: any) => ({
