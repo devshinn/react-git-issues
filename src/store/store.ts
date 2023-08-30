@@ -1,7 +1,14 @@
-import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
+import { isssueDetailSlice } from './slices/issueDetail';
+import { isssueListSlice } from './slices/issueList';
+import { Action, combineReducers, configureStore, ThunkAction } from '@reduxjs/toolkit';
+
+const reducer = combineReducers({
+  issueList: isssueListSlice.reducer,
+  issueDetail: isssueDetailSlice.reducer,
+});
 
 export const store = configureStore({
-  reducer: {},
+  reducer,
 });
 
 export type AppDispatch = typeof store.dispatch;
