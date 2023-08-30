@@ -96,5 +96,10 @@ const Contents = styled.div`
     a {
       color: skyblue;
     }
+    pre {
+      background-color: #161b22;
+      padding: 10px;
+      border-radius: 6px;
+    }
   }
 `;

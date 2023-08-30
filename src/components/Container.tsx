@@ -23,4 +23,6 @@ const Title = styled.h1`
 `;
 const ContentWrap = styled.div`
   padding: 10px 20px;
+  max-width: 1100px;
+  margin: 0 auto;
 `;
