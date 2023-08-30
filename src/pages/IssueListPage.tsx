@@ -14,19 +14,25 @@ const scrollOffsetHeight = 30;
 function Issues() {
   const dispatch = useAppDispatch();
   const { scrollHeight, scrollY } = useScroll();
-  const { loading, data: issueList, error, page } = useAppSelector(state => state.issueList);
+  const {
+    loading,
+    data: issueList,
+    error,
+    page,
+    hasMore,
+  } = useAppSelector(state => state.issueList);
 
   useEffect(() => {
     issueList.length === 0 && dispatch(fetchIssueList(1));
   }, []);
 
   useEffect(() => {
-    if (loading) return;
+    if (loading || scrollY === scrollHeight || !hasMore) return;
     if (scrollY > scrollHeight - scrollOffsetHeight) {
       dispatch(fetchIssueList(page + 1));
       return;
     }
-  }, [loading, page, issueList, scrollY, scrollHeight]);
+  }, [loading, page, issueList, scrollY, scrollHeight, issueList]);
 
   if (error) {
     return <ErrorPage />;

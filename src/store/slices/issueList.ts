@@ -1,4 +1,4 @@
-import { getIssueList } from '../../api/issue';
+import { getIssueList, LOAD_DATA_LENGTH } from '../../api/issue';
 import { Issue } from '../../types/index';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
@@ -15,7 +15,13 @@ export const fetchIssueList = createAsyncThunk(
 );
 export const isssueListSlice = createSlice({
   name: 'issueList',
-  initialState: { data: [] as Issue[], page: 0, loading: false, error: null as string | null },
+  initialState: {
+    data: [] as Issue[],
+    page: 0,
+    loading: false,
+    error: null as string | null,
+    hasMore: true,
+  },
   reducers: {},
 
   extraReducers: builder => {
@@ -26,6 +32,9 @@ export const isssueListSlice = createSlice({
       .addCase(fetchIssueList.fulfilled, (state, action) => {
         state.loading = false;
         state.data = [...state.data, ...action.payload.issues];
+        if (action.payload.issues.length < LOAD_DATA_LENGTH) {
+          state.hasMore = false;
+        }
         state.page = action.payload.page;
       })
       .addCase(fetchIssueList.rejected, (state, action) => {

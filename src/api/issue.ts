@@ -1,11 +1,13 @@
 import instance from '.';
 import { Issue, IssueDetail } from '../types';
 
-export const getIssueList = async (page = 1): Promise<Issue[]> => {
-  const per_page = 10;
+export const LOAD_DATA_LENGTH = 15;
 
+export const getIssueList = async (page = 1): Promise<Issue[]> => {
   const res = (
-    await instance.get(`facebook/react/issues?per_page=${per_page}&page=${page}&sort=comments`)
+    await instance.get(
+      `facebook/react/issues?per_page=${LOAD_DATA_LENGTH}&page=${page}&sort=comments`,
+    )
   ).data;
 
   const data = res.map((issue: any) => ({
