@@ -44,7 +44,7 @@ function Issues() {
         {issueList.map((issue, idx) => (
           <React.Fragment key={issue.issueNumber}>
             <IssueItem issue={issue} />
-            {idx % 5 === 0 && idx !== 0 && (
+            {(idx + 1) % 4 === 0 && (
               <li>
                 <AdCard />
               </li>
