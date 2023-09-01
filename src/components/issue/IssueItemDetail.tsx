@@ -1,5 +1,5 @@
-import { getDateform } from '../lib/utils';
-import { IssueDetail } from '../types';
+import { getDateform } from '../../lib/utils';
+import { IssueDetail } from '../../types';
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 import styled from 'styled-components';
 

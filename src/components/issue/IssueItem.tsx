@@ -1,5 +1,5 @@
-import { getDateform } from '../lib/utils';
-import { Issue } from '../types';
+import { getDateform } from '../../lib/utils';
+import { Issue } from '../../types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 

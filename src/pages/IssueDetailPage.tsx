@@ -1,5 +1,5 @@
 import Container from '../components/Container';
-import IssueItemDetail from '../components/IssueItemDetail';
+import IssueItemDetail from '../components/issue/IssueItemDetail';
 import Loading from '../components/Loading';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { fetchIssueDetail } from '../store/slices/issueDetail';

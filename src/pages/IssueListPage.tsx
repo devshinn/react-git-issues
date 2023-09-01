@@ -1,6 +1,6 @@
 import AdCard from '../components/AdCard';
 import Container from '../components/Container';
-import IssueItem from '../components/IssueItem';
+import IssueItem from '../components/issue/IssueItem';
 import Loading from '../components/Loading';
 import { useScroll } from '../hooks/useScroll';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
@@ -28,7 +28,7 @@ function Issues() {
   }, [dispatch, hasMore, loading, page]);
 
   useEffect(() => {
-    issueList.length === 0 && dispatch(fetchIssueList(1));
+    issueList.length && dispatch(fetchIssueList(1));
   }, []);
 
   useEffect(() => {
