@@ -6,7 +6,7 @@ import { useScroll } from '../hooks/useScroll';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { fetchIssueList } from '../store/slices/issueList';
 import ErrorPage from './ErrorPage';
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 
 const scrollOffsetHeight = 30;
@@ -22,17 +22,22 @@ function Issues() {
     hasMore,
   } = useAppSelector(state => state.issueList);
 
+  const nextIssueDispatch = useCallback(() => {
+    if (loading || !hasMore) return;
+    dispatch(fetchIssueList(page + 1));
+  }, [dispatch, hasMore, loading, page]);
+
   useEffect(() => {
     issueList.length === 0 && dispatch(fetchIssueList(1));
   }, []);
 
   useEffect(() => {
-    if (loading || scrollY === scrollHeight || !hasMore) return;
+    if (scrollY === scrollHeight) return;
     if (scrollY > scrollHeight - scrollOffsetHeight) {
-      dispatch(fetchIssueList(page + 1));
+      nextIssueDispatch();
       return;
     }
-  }, [loading, page, issueList, scrollY, scrollHeight, issueList]);
+  }, [scrollY, scrollHeight, nextIssueDispatch]);
 
   if (error) {
     return <ErrorPage />;
