@@ -1,12 +1,12 @@
 import instance from '.';
-import { Issue, IssueDetail } from '../types';
+import { FetchIssue, FetchIssueDetail, Issue, IssueDetail } from '../types';
 
 export const LOAD_DATA_LENGTH = 15;
 
-export const getIssueList = async (page = 1): Promise<Issue[]> => {
+export const getIssueList = async ({ page, repo, orga }: FetchIssue): Promise<Issue[]> => {
   const res = (
     await instance.get(
-      `facebook/react/issues?per_page=${LOAD_DATA_LENGTH}&page=${page}&sort=comments`,
+      `${orga}/${repo}/issues?per_page=${LOAD_DATA_LENGTH}&page=${page}&sort=comments`,
     )
   ).data;
 
@@ -22,8 +22,12 @@ export const getIssueList = async (page = 1): Promise<Issue[]> => {
   })) as Issue[];
   return data;
 };
-export const getIssuesDetail = async (issueNumber: number): Promise<IssueDetail> => {
-  const res = (await instance.get(`facebook/react/issues/${issueNumber}`)).data;
+export const getIssuesDetail = async ({
+  issueNumber,
+  orga,
+  repo,
+}: FetchIssueDetail): Promise<IssueDetail> => {
+  const res = (await instance.get(`${orga}/${repo}/issues/${issueNumber}`)).data;
   const data: IssueDetail = {
     id: res.id,
     issueNumber: res.number,

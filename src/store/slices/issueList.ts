@@ -1,12 +1,12 @@
 import { getIssueList, LOAD_DATA_LENGTH } from '../../api/issue';
-import { Issue } from '../../types/index';
+import { FetchIssue, Issue } from '../../types/index';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 export const fetchIssueList = createAsyncThunk(
   'react/issue-list',
-  async (page: number, { rejectWithValue }) => {
+  async ({ page, repo, orga }: FetchIssue, { rejectWithValue }) => {
     try {
-      const issues = await getIssueList(page);
+      const issues = await getIssueList({ page, repo, orga });
       return { issues, page };
     } catch (error) {
       return rejectWithValue((error as { message: string }).message);
@@ -22,7 +22,11 @@ export const isssueListSlice = createSlice({
     error: null as string | null,
     hasMore: true,
   },
-  reducers: {},
+  reducers: {
+    clearIssueList: state => {
+      state.data = [];
+    },
+  },
 
   extraReducers: builder => {
     builder
@@ -43,5 +47,5 @@ export const isssueListSlice = createSlice({
       });
   },
 });
-
+export const { clearIssueList } = isssueListSlice.actions;
 export default isssueListSlice.reducer;

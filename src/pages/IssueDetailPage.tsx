@@ -11,9 +11,10 @@ function IssueDetailPage() {
   const { issue_id } = useParams();
   const dispatch = useAppDispatch();
   const { loading, data: issue, error } = useAppSelector(state => state.issueDetail);
+  const { repo, orga } = useAppSelector(state => state.repoName);
 
   useEffect(() => {
-    dispatch(fetchIssueDetail(Number(issue_id)));
+    dispatch(fetchIssueDetail({ issueNumber: Number(issue_id), repo, orga }));
   }, []);
 
   if (error) {

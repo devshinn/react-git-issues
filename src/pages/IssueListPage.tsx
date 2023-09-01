@@ -14,6 +14,7 @@ const scrollOffsetHeight = 30;
 function Issues() {
   const dispatch = useAppDispatch();
   const { scrollHeight, scrollY } = useScroll();
+  const { repo, orga } = useAppSelector(state => state.repoName);
   const {
     loading,
     data: issueList,
@@ -24,12 +25,12 @@ function Issues() {
 
   const nextIssueDispatch = useCallback(() => {
     if (loading || !hasMore) return;
-    dispatch(fetchIssueList(page + 1));
-  }, [dispatch, hasMore, loading, page]);
+    dispatch(fetchIssueList({ page: page + 1, orga, repo }));
+  }, [dispatch, hasMore, loading, orga, page, repo]);
 
   useEffect(() => {
-    issueList.length && dispatch(fetchIssueList(1));
-  }, []);
+    !issueList.length && dispatch(fetchIssueList({ page: 1, orga, repo }));
+  }, [issueList, orga, repo]);
 
   useEffect(() => {
     if (scrollY === scrollHeight) return;

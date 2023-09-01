@@ -21,3 +21,14 @@ export type IssueDetail = {
     avatar: string;
   };
 };
+
+export type FetchIssue = {
+  page: number;
+  repo: string;
+  orga: string;
+};
+export type FetchIssueDetail = {
+  issueNumber: number;
+  repo: string;
+  orga: string;
+};

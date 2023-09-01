@@ -1,10 +1,12 @@
 import { isssueDetailSlice } from './slices/issueDetail';
 import { isssueListSlice } from './slices/issueList';
+import { repoNameSlice } from './slices/repoInfo';
 import { Action, combineReducers, configureStore, ThunkAction } from '@reduxjs/toolkit';
 
 const reducer = combineReducers({
   issueList: isssueListSlice.reducer,
   issueDetail: isssueDetailSlice.reducer,
+  repoName: repoNameSlice.reducer,
 });
 
 export const store = configureStore({

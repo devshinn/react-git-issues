@@ -1,12 +1,12 @@
 import { getIssuesDetail } from '../../api/issue';
-import { IssueDetail } from '../../types/index';
+import { FetchIssueDetail, IssueDetail } from '../../types/index';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 export const fetchIssueDetail = createAsyncThunk(
   'react/issue-detail',
-  async (issueNumber: number, { rejectWithValue }) => {
+  async ({ issueNumber, orga, repo }: FetchIssueDetail, { rejectWithValue }) => {
     try {
-      const issues = await getIssuesDetail(issueNumber);
+      const issues = await getIssuesDetail({ issueNumber, orga, repo });
       return issues;
     } catch (error) {
       return rejectWithValue((error as { message: string }).message);
