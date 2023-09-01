@@ -38,7 +38,7 @@ function Issues() {
       nextIssueDispatch();
       return;
     }
-  }, [scrollY, scrollHeight, nextIssueDispatch]);
+  }, [scrollY, scrollHeight]);
 
   if (error) {
     return <ErrorPage />;
