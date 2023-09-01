@@ -39,7 +39,7 @@ function Issues() {
   }
   return (
     <Container>
-      <Title>리액트 이슈 목록</Title>
+      <Title>#issue</Title>
       <Ul>
         {issueList.map((issue, idx) => (
           <React.Fragment key={issue.issueNumber}>

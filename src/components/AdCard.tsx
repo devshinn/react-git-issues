@@ -15,7 +15,7 @@ export default AdCard;
 const Styles = styled.a`
   display: block;
   height: 100px;
-  background-color: #f79df7;
+  background-color: #a788a7;
   border-radius: 6px;
   padding: 20px;
 `;

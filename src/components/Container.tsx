@@ -15,11 +15,11 @@ export default Container;
 const ContainerStyle = styled.div``;
 const Title = styled.h1`
   padding: 10px;
-  font-size: 20ox;
-  color: #0755ff;
-  text-align: center;
+  font-size: 18px;
+  color: #f1f6ff;
   margin-bottom: 20px;
-  border-bottom: solid 2px #0755ff;
+  border-bottom: solid 2px var(--border);
+  background-color: #161616;
 `;
 const ContentWrap = styled.div`
   padding: 10px 20px;
