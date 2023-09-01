@@ -1,6 +1,67 @@
+## Github Api를 활용한 Repository Issue 확인.
+
 ### [배포링크](https://react-git-issues.vercel.app/issues)
 
-`npm start`
+실행방헙
+
+```
+git clone https://github.com/devshinn/react-git-issues.git
+npm install
+npm start
+```
+
+### 주요기능
+
+- Github API를 활용하여, 이슈 목록을 가져옵니다.
+- 이슈 목록을 정렬합니다.
+- 화면을 아래로 스크롤 할 시 이슈 목록을 추가합니다.(인피니티 스크롤)
+
+### 사용된 기술스택
+
+```
+react
+typescript
+reactstyled-components
+lodash
+axios
+react-markdown
+```
+
+### 폴더구조
+
+```json
+...
+├── src/
+│   ├── 📂api/
+│   │   ├── index
+│   │   └── issue
+│   ├── 📂components/
+│   │   ├── 📂isse/
+│   │   │   ├── IssueItem
+│   │   │   └── IsseItemDetail
+│   │   ├── AdCard ==>광고카드
+│   │   ├── Layout
+│   │   └── Loading
+│   ├── 📂hooks/
+│   │   └── useScroll ==>무한스크롤에 사용
+│   ├── 📂lib/
+│   │   └── utils  ==> DateFormat 변환lib
+│   ├── 📂pages/
+│   │   ├── ErrorPage
+│   │   ├── IssueDetailPage
+│   │   └── IssueListPage
+│   ├── 📂store/
+│   │   ├── 📂slices/
+│   │   │   ├── issueDetails
+│   │   │   └── issueList
+│   │   ├── hooks
+│   │   └── store
+│   ├── 📂types/
+│   │   └── index
+│   ├── app
+│   └── ...
+└── ...
+```
 
 ### Commit Message 컨벤션
 
